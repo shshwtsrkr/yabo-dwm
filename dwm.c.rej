@@ -1,28 +1,71 @@
 --- dwm.c
 +++ dwm.c
-@@ -289,9 +320,10 @@ static void (*handler[LASTEvent]) (XEvent *) = {
- 	[MapRequest] = maprequest,
- 	[MotionNotify] = motionnotify,
- 	[PropertyNotify] = propertynotify,
-+    [ResizeRequest] = resizerequest,
- 	[UnmapNotify] = unmapnotify
- };
--static Atom wmatom[WMLast], netatom[NetLast];
-+static Atom wmatom[WMLast], netatom[NetLast], xatom[XLast];
- static int running = 1;
- static Cur *cursor[CurLast];
- static Clr **scheme;
-@@ -1214,6 +1333,13 @@ maprequest(XEvent *e)
- 	static XWindowAttributes wa;
- 	XMapRequestEvent *ev = &e->xmaprequest;
+@@ -1713,13 +1740,15 @@ tile(Monitor *m)
+ 		mw = m->ww;
+ 	for (i = my = ty = 0, c = nexttiled(m->clients); c; c = nexttiled(c->next), i++)
+ 		if (i < m->nmaster) {
+-			h = (m->wh - my) / (MIN(n, m->nmaster) - i);
++			h = (m->wh - my) * (c->cfact / mfacts);
+ 			resize(c, m->wx, m->wy + my, mw - (2*c->bw), h - (2*c->bw), 0);
+ 			my += HEIGHT(c);
++			mfacts -= c->cfact;
+ 		} else {
+-			h = (m->wh - ty) / (n - i);
++			h = (m->wh - ty) * (c->cfact / sfacts);
+ 			resize(c, m->wx + mw, m->wy + ty, m->ww - mw - (2*c->bw), h - (2*c->bw), 0);
+ 			ty += HEIGHT(c);
++			sfacts -= c->cfact;
+ 		}
+ }
  
-+	Client *i;
-+	if ((i = wintosystrayicon(ev->window))) {
-+		sendevent(i->win, netatom[Xembed], StructureNotifyMask, CurrentTime, XEMBED_WINDOW_ACTIVATE, 0, systray->win, XEMBED_EMBEDDED_VERSION);
-+		resizebarwin(selmon);
-+		updatesystray();
-+	}
-+
- 	if (!XGetWindowAttributes(dpy, ev->window, &wa))
- 		return;
- 	if (wa.override_redirect)
+--- dwm.c
++++ dwm.c
+@@ -214,7 +218,6 @@ static void sigchld(int unused);
+ static void spawn(const Arg *arg);
+ static void tag(const Arg *arg);
+ static void tagmon(const Arg *arg);
+-static void tile(Monitor *);
+ static void togglebar(const Arg *arg);
+ static void togglefloating(const Arg *arg);
+ static void toggletag(const Arg *arg);
+@@ -1699,40 +1706,6 @@ tagmon(const Arg *arg)
+ 	sendmon(selmon->sel, dirtomon(arg->i));
+ }
+ 
+-void
+-tile(Monitor *m)
+-{
+-	unsigned int i, n, h, mw, my, ty;
+-	float mfacts = 0, sfacts = 0;
+-	Client *c;
+-
+-	for (n = 0, c = nexttiled(m->clients); c; c = nexttiled(c->next), n++) {
+-		if (n < m->nmaster)
+-			mfacts += c->cfact;
+-		else
+-			sfacts += c->cfact;
+-	}
+-	if (n == 0)
+-		return;
+-
+-	if (n > m->nmaster)
+-		mw = m->nmaster ? m->ww * m->mfact : 0;
+-	else
+-		mw = m->ww;
+-	for (i = my = ty = 0, c = nexttiled(m->clients); c; c = nexttiled(c->next), i++)
+-		if (i < m->nmaster) {
+-			h = (m->wh - my) * (c->cfact / mfacts);
+-			resize(c, m->wx, m->wy + my, mw - (2*c->bw), h - (2*c->bw), 0);
+-			my += HEIGHT(c);
+-			mfacts -= c->cfact;
+-		} else {
+-			h = (m->wh - ty) * (c->cfact / sfacts);
+-			resize(c, m->wx + mw, m->wy + ty, m->ww - mw - (2*c->bw), h - (2*c->bw), 0);
+-			ty += HEIGHT(c);
+-			sfacts -= c->cfact;
+-		}
+-}
+-
+ void
+ togglebar(const Arg *arg)
+ {
