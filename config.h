@@ -23,13 +23,14 @@ static const char *scratchpadcmd[] = { "kitty", "-T", scratchpadname, NULL };
 static const char col_gray1[]       = "#222222";
 static const char col_gray2[]       = "#444444";
 static const char col_gray3[]       = "#bbbbbb";
-static const char col_gray4[]       = "#eeeeee";
+static const char col_gray4[]       = "#9e9d9d";
 static const char col_gray5[]       = "#4e90e6";
 static const char col_cyan[]        = "#e61207";
+static const char col_redl[]        = "#f26161";
 static const char *colors[][3]      = {
 	/*               fg         bg         border   */
-	[SchemeNorm] = { col_gray3, col_gray1, col_gray1 },
-	[SchemeSel]  = { col_gray1, col_gray5,  col_cyan  },
+	[SchemeNorm] = { col_gray4, col_gray1, col_gray1 },
+	[SchemeSel]  = { col_redl, col_gray1,  col_cyan  },
 };
 
 /* tagging */
