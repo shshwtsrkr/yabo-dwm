@@ -96,6 +96,10 @@ static const char *pctlplaycmd[]  = { "playerctl", "play-pause", NULL };
 static const char *pctlpausecmd[]  = { "playerctl", "pause", NULL };
 static const char *pctlnextcmd[]  = { "playerctl", "next", NULL };
 static const char *pctlpreviouscmd[]  = { "playerctl", "previous", NULL };
+static const char *browsecmd[]  = { "brave", NULL };
+static const char *editorcmd[]  = { "code", NULL };
+static const char *filescmd[]  = { "nemo", NULL };
+static const char *sscmd[]  = { "flameshot", "gui", NULL };
 #include "movestack.c"
 #include <X11/XF86keysym.h>
 static const Key keys[] = {
@@ -104,6 +108,10 @@ static const Key keys[] = {
 	{ MODKEY,             	        XK_Return, spawn,          {.v = termcmd } },
 	{ MODKEY,                       XK_grave,  togglescratch,  {.v = scratchpadcmd } },
 	{ MODKEY|ShiftMask,             XK_b,      togglebar,      {0} },
+	{ MODKEY,             	        XK_b, spawn,          {.v = browsecmd } },
+	{ MODKEY,             	        XK_c, spawn,          {.v = editorcmd } },
+	{ MODKEY,             	        XK_f, spawn,          {.v = filescmd } },
+	{ MODKEY|ShiftMask,             XK_s, spawn,          {.v = sscmd } },
 	{ 0,                            XF86XK_AudioPlay,          spawn,      {.v = pctlplaycmd } },
 	{ 0,                            XF86XK_AudioPause,         spawn,      {.v = pctlpausecmd } },
 	{ 0,                            XF86XK_AudioNext,          spawn,      {.v = pctlnextcmd } },
