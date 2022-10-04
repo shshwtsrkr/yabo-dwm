@@ -3,8 +3,8 @@
 
 /* appearance */
 static const unsigned int borderpx  = 2;        /* border pixel of windows */
-static const char *fonts[]          = { "JetBrainsMono Nerd Font:size=9" };
-static const char dmenufont[]       = "JetBrainsMono Nerd Font:size=9";
+static const char *fonts[]          = { "JetBrainsMono Nerd Font:size=10" };
+static const char dmenufont[]       = "JetBrainsMono Nerd Font:size=10";
 static const unsigned int snap      = 32;       /* snap pixel */
 static const unsigned int gappih    = 0;       /* horiz inner gap between windows */
 static const unsigned int gappiv    = 0;       /* vert inner gap between windows */
