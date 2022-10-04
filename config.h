@@ -101,12 +101,14 @@ static const char *editorcmd[]  = { "code", NULL };
 static const char *filescmd[]  = { "nemo", NULL };
 static const char *sscmd[]  = { "flameshot", "gui", NULL };
 static const char *lockcmd[]  = { "systemctl", "suspend", NULL };
+static const char *pmenucmd[]  = { "/home/st/.scripts/pmenu", NULL };
 #include "movestack.c"
 #include <X11/XF86keysym.h>
 static const Key keys[] = {
 	/* modifier                     key        function        argument */
 	{ MODKEY,                       XK_r,      spawn,          {.v = dmenucmd } },
 	{ MODKEY,             	        XK_Return, spawn,          {.v = termcmd } },
+	{ MODKEY,             	        XK_p, spawn,          {.v = pmenucmd } },
 	{ MODKEY,                       XK_s,  togglescratch,  {.v = scratchpadcmd } },
 	{ MODKEY|ShiftMask,             XK_b,      togglebar,      {0} },
 	{ MODKEY,             	        XK_b, spawn,          {.v = browsecmd } },
