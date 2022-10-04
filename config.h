@@ -100,6 +100,7 @@ static const char *browsecmd[]  = { "brave", NULL };
 static const char *editorcmd[]  = { "code", NULL };
 static const char *filescmd[]  = { "nemo", NULL };
 static const char *sscmd[]  = { "flameshot", "gui", NULL };
+static const char *lockcmd[]  = { "systemctl", "suspend", NULL };
 #include "movestack.c"
 #include <X11/XF86keysym.h>
 static const Key keys[] = {
@@ -112,6 +113,7 @@ static const Key keys[] = {
 	{ MODKEY,             	        XK_c, spawn,          {.v = editorcmd } },
 	{ MODKEY,             	        XK_f, spawn,          {.v = filescmd } },
 	{ MODKEY|ShiftMask,             XK_s, spawn,          {.v = sscmd } },
+	{ MODKEY|Mod1Mask,              XK_l, spawn,          {.v = lockcmd } },
 	{ 0,                            XF86XK_AudioPlay,          spawn,      {.v = pctlplaycmd } },
 	{ 0,                            XF86XK_AudioPause,         spawn,      {.v = pctlpausecmd } },
 	{ 0,                            XF86XK_AudioNext,          spawn,      {.v = pctlnextcmd } },
