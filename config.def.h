@@ -3,8 +3,8 @@
 
 /* appearance */
 static const unsigned int borderpx  = 2;        /* border pixel of windows */
-static const char *fonts[]          = { "JetBrainsMono Nerd Font Mono:size=9" };
-static const char dmenufont[]       = "JetBrainsMono Nerd Font Mono:size=9";
+static const char *fonts[]          = { "JetBrainsMono Nerd Font:size=9" };
+static const char dmenufont[]       = "JetBrainsMono Nerd Font:size=9";
 static const unsigned int snap      = 32;       /* snap pixel */
 static const unsigned int gappih    = 0;       /* horiz inner gap between windows */
 static const unsigned int gappiv    = 0;       /* vert inner gap between windows */
@@ -26,7 +26,7 @@ static const char col_gray3[]       = "#bbbbbb";
 static const char col_gray4[]       = "#9e9d9d";
 static const char col_gray5[]       = "#4e90e6";
 static const char col_cyan[]        = "#e61207";
-static const char col_redl[]        = "#f26161";
+static const char col_redl[]        = "#ff7878";
 static const char *colors[][3]      = {
 	/*               fg         bg         border   */
 	[SchemeNorm] = { col_gray4, col_gray1, col_gray1 },
@@ -100,18 +100,20 @@ static const char *browsecmd[]  = { "brave", NULL };
 static const char *editorcmd[]  = { "code", NULL };
 static const char *filescmd[]  = { "nemo", NULL };
 static const char *sscmd[]  = { "flameshot", "gui", NULL };
+static const char *lockcmd[]  = { "systemctl", "suspend", NULL };
 #include "movestack.c"
 #include <X11/XF86keysym.h>
 static const Key keys[] = {
 	/* modifier                     key        function        argument */
 	{ MODKEY,                       XK_r,      spawn,          {.v = dmenucmd } },
 	{ MODKEY,             	        XK_Return, spawn,          {.v = termcmd } },
-	{ MODKEY,                       XK_grave,  togglescratch,  {.v = scratchpadcmd } },
+	{ MODKEY,                       XK_s,  togglescratch,  {.v = scratchpadcmd } },
 	{ MODKEY|ShiftMask,             XK_b,      togglebar,      {0} },
 	{ MODKEY,             	        XK_b, spawn,          {.v = browsecmd } },
 	{ MODKEY,             	        XK_c, spawn,          {.v = editorcmd } },
 	{ MODKEY,             	        XK_f, spawn,          {.v = filescmd } },
 	{ MODKEY|ShiftMask,             XK_s, spawn,          {.v = sscmd } },
+	{ MODKEY|ControlMask,           XK_l, spawn,          {.v = lockcmd } },
 	{ 0,                            XF86XK_AudioPlay,          spawn,      {.v = pctlplaycmd } },
 	{ 0,                            XF86XK_AudioPause,         spawn,      {.v = pctlpausecmd } },
 	{ 0,                            XF86XK_AudioNext,          spawn,      {.v = pctlnextcmd } },
