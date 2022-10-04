@@ -1,17 +1,15 @@
-
-/* See LICENSE file for copyright and license details. */
-
-/* appearance */
-static const unsigned int borderpx  = 2;        /* border pixel of windows */
-static const char *fonts[]          = { "JetBrainsMono Nerd Font:size=10" };
-static const char dmenufont[]       = "JetBrainsMono Nerd Font:size=10";
-static const unsigned int snap      = 32;       /* snap pixel */
-static const unsigned int gappih    = 0;       /* horiz inner gap between windows */
-static const unsigned int gappiv    = 0;       /* vert inner gap between windows */
-static const unsigned int gappoh    = 0;       /* horiz outer gap between windows and screen edge */
-static const unsigned int gappov    = 0;       /* vert outer gap between windows and screen edge */
-static       int smartgaps          = 0;        /* 1 means no outer gap when there is only one window */
-static const unsigned int systraypinning = 0;   /* 0: sloppy systray follows selected monitor, >0: pin systray to monitor X */
+/* See LICENSE file for copyright and license details. */ 
+/* appearance */ 
+static const unsigned int borderpx  = 2;        /* border pixel of windows */ 
+static const char *fonts[]          = { "JetBrainsMono Nerd Font:size=10" }; 
+static const char dmenufont[]       = "JetBrainsMono Nerd Font:size=10"; 
+static const unsigned int snap      = 32;       /* snap pixel */ 
+static const unsigned int gappih    = 0;       /* horiz inner gap between windows */ 
+static const unsigned int gappiv    = 0;       /* vert inner gap between windows */ 
+static const unsigned int gappoh    = 0;       /* horiz outer gap between windows and screen edge */ 
+static const unsigned int gappov    = 0;       /* vert outer gap between windows and screen edge */ 
+static       int smartgaps          = 0;        /* 1 means no outer gap when there is only one window */ 
+static const unsigned int systraypinning = 0;   /* 0: sloppy systray follows selected monitor, >0: pin systray to monitor X */ 
 static const unsigned int systrayonleft = 0;   	/* 0: systray in the right corner, >0: systray on left of status text */
 static const unsigned int systrayspacing = 2;   /* systray spacing */
 static const int systraypinningfailfirst = 1;   /* 1: if pinning fails, display systray on the first monitor, False: display systray on the last monitor*/
@@ -102,6 +100,7 @@ static const char *filescmd[]  = { "nemo", NULL };
 static const char *sscmd[]  = { "flameshot", "gui", NULL };
 static const char *lockcmd[]  = { "systemctl", "suspend", NULL };
 static const char *pmenucmd[]  = { "/home/st/.scripts/pmenu", NULL };
+static const char *netcmd[]  = { "./.scripts/netsh", NULL };
 #include "movestack.c"
 #include <X11/XF86keysym.h>
 static const Key keys[] = {
@@ -116,6 +115,7 @@ static const Key keys[] = {
 	{ MODKEY,             	        XK_f, spawn,          {.v = filescmd } },
 	{ MODKEY|ShiftMask,             XK_s, spawn,          {.v = sscmd } },
 	{ MODKEY|Mod1Mask,              XK_l, spawn,          {.v = lockcmd } },
+	{ MODKEY,		                XK_n, spawn,          {.v = netcmd } },
 	{ 0,                            XF86XK_AudioPlay,          spawn,      {.v = pctlplaycmd } },
 	{ 0,                            XF86XK_AudioPause,         spawn,      {.v = pctlpausecmd } },
 	{ 0,                            XF86XK_AudioNext,          spawn,      {.v = pctlnextcmd } },
