@@ -1,13 +1,13 @@
 /* See LICENSE file for copyright and license details. */ 
 /* appearance */ 
 static const unsigned int borderpx  = 2;        /* border pixel of windows */ 
-static const char *fonts[]          = { "JetBrainsMono Nerd Font:size=10" }; 
-static const char dmenufont[]       = "JetBrainsMono Nerd Font:size=10"; 
+static const char *fonts[]          = { "JetBrainsMono Nerd Font:size=11" }; 
+static const char dmenufont[]       = "JetBrainsMono Nerd Font:size=11"; 
 static const unsigned int snap      = 32;       /* snap pixel */ 
-static const unsigned int gappih    = 0;       /* horiz inner gap between windows */ 
-static const unsigned int gappiv    = 0;       /* vert inner gap between windows */ 
-static const unsigned int gappoh    = 0;       /* horiz outer gap between windows and screen edge */ 
-static const unsigned int gappov    = 0;       /* vert outer gap between windows and screen edge */ 
+static const unsigned int gappih    = 5;        /* horiz inner gap between windows */ 
+static const unsigned int gappiv    = 5;        /* vert inner gap between windows */ 
+static const unsigned int gappoh    = 5;        /* horiz outer gap between windows and screen edge */ 
+static const unsigned int gappov    = 5;        /* vert outer gap between windows and screen edge */ 
 static       int smartgaps          = 0;        /* 1 means no outer gap when there is only one window */ 
 static const unsigned int systraypinning = 0;   /* 0: sloppy systray follows selected monitor, >0: pin systray to monitor X */ 
 static const unsigned int systrayonleft = 0;   	/* 0: systray in the right corner, >0: systray on left of status text */
@@ -107,28 +107,19 @@ static const Key keys[] = {
 	/* modifier                     key        function        argument */
 	{ MODKEY,                       XK_r,      spawn,          {.v = dmenucmd } },
 	{ MODKEY,             	        XK_Return, spawn,          {.v = termcmd } },
-	{ MODKEY,             	        XK_p, spawn,          {.v = pmenucmd } },
-	{ MODKEY,                       XK_s,  togglescratch,  {.v = scratchpadcmd } },
+	{ MODKEY,             	        XK_p,      spawn,          {.v = pmenucmd } },
+	{ MODKEY,                       XK_s,      togglescratch,  {.v = scratchpadcmd } },
 	{ MODKEY|ShiftMask,             XK_b,      togglebar,      {0} },
-	{ MODKEY,             	        XK_b, spawn,          {.v = browsecmd } },
-	{ MODKEY,             	        XK_c, spawn,          {.v = editorcmd } },
-	{ MODKEY,             	        XK_f, spawn,          {.v = filescmd } },
-	{ MODKEY|ShiftMask,             XK_s, spawn,          {.v = sscmd } },
-	{ MODKEY|Mod1Mask,              XK_l, spawn,          {.v = lockcmd } },
-	{ MODKEY,		                XK_n, spawn,          {.v = netcmd } },
-	{ 0,                            XF86XK_AudioPlay,          spawn,      {.v = pctlplaycmd } },
-	{ 0,                            XF86XK_AudioPause,         spawn,      {.v = pctlpausecmd } },
-	{ 0,                            XF86XK_AudioNext,          spawn,      {.v = pctlnextcmd } },
-	{ 0,                            XF86XK_AudioPrev,          spawn,      {.v = pctlpreviouscmd } },
-	{ 0,                            XF86XK_AudioMute, spawn,      {.v = togglemutecmd } },
-	{ 0,                            XF86XK_AudioRaiseVolume, spawn, {.v = volumeup } },
-	{ 0,                            XF86XK_AudioLowerVolume, spawn, {.v = volumedown } },
-	{ 0,                            XF86XK_MonBrightnessUp, spawn, {.v = brightnessup} },
-	{ 0,                            XF86XK_MonBrightnessDown, spawn, {.v = brightnessdown} },
+	{ MODKEY,             	        XK_b,      spawn,          {.v = browsecmd } },
+	{ MODKEY,             	        XK_c,      spawn,          {.v = editorcmd } },
+	{ MODKEY,             	        XK_f,      spawn,          {.v = filescmd } },
+	{ MODKEY|ShiftMask,             XK_s,      spawn,          {.v = sscmd } },
+	{ MODKEY|Mod1Mask,              XK_l,      spawn,          {.v = lockcmd } },
+	{ MODKEY,		                XK_n,      spawn,          {.v = netcmd } },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
-	{ MODKEY,                       XK_i,      incnmaster,     {.i = +1 } },
-	{ MODKEY,                       XK_d,      incnmaster,     {.i = -1 } },
+	{ MODKEY,                       XK_i,      incnmaster,     {.i = 0 } },
+	{ MODKEY,                       XK_d,      incnmaster,     {.i = 0 } },
 	{ MODKEY,                       XK_h,      setmfact,       {.f = -0.05} },
 	{ MODKEY,                       XK_l,      setmfact,       {.f = +0.05} },
 	{ MODKEY|ShiftMask,             XK_h,      setcfact,       {.f = +0.25} },
@@ -137,24 +128,24 @@ static const Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_j,      movestack,      {.i = +1 } },
 	{ MODKEY|ShiftMask,             XK_k,      movestack,      {.i = -1 } },
 	{ MODKEY|ShiftMask,             XK_Return, zoom,           {0} },
-	{ MODKEY|Mod4Mask,              XK_u,      incrgaps,       {.i = +1 } },
-	{ MODKEY|Mod4Mask|ShiftMask,    XK_u,      incrgaps,       {.i = -1 } },
-	{ MODKEY|Mod4Mask,              XK_i,      incrigaps,      {.i = +1 } },
-	{ MODKEY|Mod4Mask|ShiftMask,    XK_i,      incrigaps,      {.i = -1 } },
-	{ MODKEY|Mod4Mask,              XK_o,      incrogaps,      {.i = +1 } },
-	{ MODKEY|Mod4Mask|ShiftMask,    XK_o,      incrogaps,      {.i = -1 } },
-	{ MODKEY|Mod4Mask,              XK_6,      incrihgaps,     {.i = +1 } },
-	{ MODKEY|Mod4Mask|ShiftMask,    XK_6,      incrihgaps,     {.i = -1 } },
-	{ MODKEY|Mod4Mask,              XK_7,      incrivgaps,     {.i = +1 } },
-	{ MODKEY|Mod4Mask|ShiftMask,    XK_7,      incrivgaps,     {.i = -1 } },
-	{ MODKEY|Mod4Mask,              XK_8,      incrohgaps,     {.i = +1 } },
-	{ MODKEY|Mod4Mask|ShiftMask,    XK_8,      incrohgaps,     {.i = -1 } },
-	{ MODKEY|Mod4Mask,              XK_9,      incrovgaps,     {.i = +1 } },
-	{ MODKEY|Mod4Mask|ShiftMask,    XK_9,      incrovgaps,     {.i = -1 } },
-	{ MODKEY|Mod4Mask,              XK_0,      togglegaps,     {0} },
-	{ MODKEY|Mod4Mask|ShiftMask,    XK_0,      defaultgaps,    {0} },
+	{ MODKEY|Mod1Mask,              XK_u,      incrgaps,       {.i = +1 } },
+	{ MODKEY|Mod1Mask|ShiftMask,    XK_u,      incrgaps,       {.i = -1 } },
+	{ MODKEY|Mod1Mask,              XK_i,      incrigaps,      {.i = +1 } },
+	{ MODKEY|Mod1Mask|ShiftMask,    XK_i,      incrigaps,      {.i = -1 } },
+	{ MODKEY|Mod1Mask,              XK_o,      incrogaps,      {.i = +1 } },
+	{ MODKEY|Mod1Mask|ShiftMask,    XK_o,      incrogaps,      {.i = -1 } },
+	{ MODKEY|Mod1Mask,              XK_6,      incrihgaps,     {.i = +1 } },
+	{ MODKEY|Mod1Mask|ShiftMask,    XK_6,      incrihgaps,     {.i = -1 } },
+	{ MODKEY|Mod1Mask,              XK_7,      incrivgaps,     {.i = +1 } },
+	{ MODKEY|Mod1Mask|ShiftMask,    XK_7,      incrivgaps,     {.i = -1 } },
+	{ MODKEY|Mod1Mask,              XK_8,      incrohgaps,     {.i = +1 } },
+	{ MODKEY|Mod1Mask|ShiftMask,    XK_8,      incrohgaps,     {.i = -1 } },
+	{ MODKEY|Mod1Mask,              XK_9,      incrovgaps,     {.i = +1 } },
+	{ MODKEY|Mod1Mask|ShiftMask,    XK_9,      incrovgaps,     {.i = -1 } },
+	{ MODKEY|Mod1Mask,              XK_0,      togglegaps,     {0} },
+	{ MODKEY|Mod1Mask|ShiftMask,    XK_0,      defaultgaps,    {0} },
 	{ MODKEY,                       XK_Tab,    view,           {0} },
-	{ MODKEY,		        XK_q,      killclient,     {0} },
+	{ MODKEY,		                XK_q,      killclient,     {0} },
 	{ MODKEY|ShiftMask,             XK_t,      setlayout,      {.v = &layouts[0]} },
 	{ MODKEY|ShiftMask,             XK_f,      setlayout,      {.v = &layouts[1]} },
 	{ MODKEY|ShiftMask,             XK_m,      setlayout,      {.v = &layouts[2]} },
@@ -175,6 +166,15 @@ static const Key keys[] = {
 	TAGKEYS(                        XK_7,                      6)
 	TAGKEYS(                        XK_8,                      7)
 	TAGKEYS(                        XK_9,                      8)
+    { 0,                            XF86XK_AudioPlay,spawn,         {.v = pctlplaycmd } },
+	{ 0,                            XF86XK_AudioPause,spawn,        {.v = pctlpausecmd } },
+	{ 0,                            XF86XK_AudioNext,spawn,         {.v = pctlnextcmd } },
+	{ 0,                            XF86XK_AudioPrev,spawn,         {.v = pctlpreviouscmd } },
+	{ 0,                            XF86XK_AudioMute,spawn,         {.v = togglemutecmd } },
+	{ 0,                            XF86XK_AudioRaiseVolume, spawn, {.v = volumeup } },
+	{ 0,                            XF86XK_AudioLowerVolume, spawn, {.v = volumedown } },
+	{ 0,                            XF86XK_MonBrightnessUp,  spawn, {.v = brightnessup} },
+	{ 0,                            XF86XK_MonBrightnessDown,spawn, {.v = brightnessdown} },
 	{ MODKEY|ShiftMask,             XK_q,      quit,           {0} },
 	{ MODKEY|ControlMask|ShiftMask, XK_q,      quit,           {1} }, 
 };
