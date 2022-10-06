@@ -29,7 +29,7 @@ static const char col_cyand[]        = "#d7a6ff";
 static const char *colors[][3]      = {
 	/*               fg         bg         border   */
 	[SchemeNorm] = { col_gray4, col_gray1, col_gray1 },
-	[SchemeSel]  = { col_gray0, col_cyand,  col_cyand  },
+	[SchemeSel]  = { col_gray1, col_cyand,  col_cyand  },
 };
 
 /* tagging */
